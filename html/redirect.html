@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Redirecting...</title>
+
+  <style>
+    .flashes {
+        list-style: none;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .success {
+        color: green;
+    }
+
+  </style>
+
+</head>
+
+<body>
+{% block content %}
+  <div class="flashes">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <script>
+    // Wait for 3 seconds and then redirect to the specified URL
+    setTimeout(function() {
+      window.location.href = '{{ redirect_url }}';
+    }, 3000);
+  </script>
+{% endblock %}

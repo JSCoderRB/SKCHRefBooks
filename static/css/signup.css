@@ -1,0 +1,74 @@
+body {
+  background-color: #edf2fa;
+  font-family: Arial, sans-serif;
+}
+
+#signupFormDiv {
+  position: fixed;
+  overflow: scroll;
+  margin-left: 410px;
+  margin-top: 70px;
+  width: 450px;
+  height: 550px;
+  overflow-x: hidden;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  color: #333;
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+input[type=text],
+input[type=number],
+input[type=email],
+input[type=password] {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-bottom: 90px;
+  margin-top: 5px;
+  margin-left: 35px;
+  padding: 15px;
+  width: 80%;
+}
+
+input[type=submit] {
+  background-color: #2d2d2e;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 90px;
+  margin-top: 5px;
+  margin-left: 35px;
+  padding: 15px;
+  width: 80%;
+}
+
+input[type=submit]:hover {
+  background-color: #3e3f40;
+}
+
+#email,
+#name,
+#grade,
+#contact_number,
+#address,
+#password,
+#password_confirmation {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+label {
+  margin-left: 40px;
+}

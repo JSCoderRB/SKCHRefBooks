@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Home</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/dashboard.css') }}">
+  </head>
+
+  <body>
+    <div id='topBar'>
+      <img src='static/img/Logo.png' id='logo' alt='Image not found'>
+      <img src='static/img/SearchIcon.png' id='searchIcon' alt='Image not found' onclick='ask()'>
+      <form id='searchForm'>
+        <input type="text" id="search" name="search" placeholder="(Click the search icon)">
+      </form>
+      <img src='static/img/ProfileIcon.png' id='profileIcon' alt='Image not found'>
+      <img src='static/img/MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
+      <img src='static/img/MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
+    </div>
+
+    <div id='dropdown'>
+      <div id='name'><p> {{ name }} </p></div>
+      <hr>
+      <p id='email'>Email : {{ email }}</p>
+      <p id='class'>Class : {{ grade }}</p>
+      <p id='upload'>Books uploaded : {{ my_uploads }}</p>
+      <p id='currentRequest'>Current book request : {{ curr_request }}</p>
+      <p id='requestStatus'>Request Status : {{ request_stat }}</p>
+      <p id='uploadStatus'>Uploads Status : {{ uploads_stat }}</p>
+      <div class='logout'>
+	      <form id='logout' action="/logout">
+            <img src='static/img/LogoutIcon.png' id='logoutIcon' alt='Image not found'>
+            <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></input></div>
+	      </form>
+      </div>
+    </div>
+
+    <div id='subBar'></div>
+
+    <p id='welcome'>Welcome back, {{ name }} !</p>
+
+
+    <div class="availableBooks">
+      <h3 id='searchMsg'><u onclick='goBack()'><b>Showing only search results. Click to go back.</b></u></h3>
+
+      {% for i in range(length) %}
+        <div class="book" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+          <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+          <h3>{{ uploads[i]["book_name"] }}</h3>
+          <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+          <p>By {{ uploads[i]["author"] }}</p>
+          <form class="request" action="/book_request" method="post">
+            <button type="submit" name="request_button" value='{{ i }}'>Request this book</button>
+          </form>
+    </div>
+      {% endfor %}
+
+
+    </div>
+
+<script>
+
+function slideLeft(){
+
+drop = document.getElementById('dropdown') ;
+document.getElementById('menuIcon2').style.display = 'block' ; 
+document.getElementById('menuIcon').style.display = 'none' ; 
+r = -400 ;
+
+function slide(){ 
+  r += 10 ;
+  drop.style.right = String(r) + 'px';
+  console.log(drop.style.right)
+  if(r < 20){ 
+     window.requestAnimationFrame(slide);
+  }
+}
+
+slide();
+
+}
+
+function slideRight(){
+
+drop = document.getElementById('dropdown') ;
+document.getElementById('menuIcon2').style.display = 'none' ; 
+document.getElementById('menuIcon').style.display = 'block' ; 
+r = 10 ;
+
+function slide(){ 
+  r -= 10 ;
+  drop.style.right = String(r) + 'px';
+  console.log(drop.style.right)
+  if(r > -400){ 
+     window.requestAnimationFrame(slide);
+  }
+}
+
+slide();
+
+}
+
+function ask(){
+  book = prompt('Enter the name of the book you want to search').toLowerCase();
+  allBooks = Array.from(document.getElementsByClassName('book'));
+  document.getElementById('searchMsg').style.display = 'block';
+  document.getElementById('welcome').style.display = 'none';
+  for (var i = 0; i < allBooks.length; i++) {
+    if(!(allBooks[i].id.toLowerCase().includes(book))){
+      allBooks[i].style.display = 'none';
+    } else {
+      allBooks[i].style.display = 'flex';
+    }
+  }
+}
+
+
+function goBack(){
+  allBooks = Array.from(document.getElementsByClassName('book'));
+  document.getElementById('searchMsg').style.display = 'none';
+  document.getElementById('welcome').style.display = 'block';
+  for (var i = 0; i < allBooks.length; i++) {
+    allBooks[i].style.display = 'flex';
+  }
+}
+
+</script>
+
+</body>
+
+</html>

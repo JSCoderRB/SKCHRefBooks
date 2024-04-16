@@ -1,0 +1,279 @@
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-40%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+body {
+  background-color: #e8f0fa;
+}
+
+#topBar {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 12%;
+  color: white;
+  background-color: #000000;
+}
+
+#topBar p {
+  font-size: 1rem;
+  margin: auto;
+  padding: 200px 60px;
+  text-align: center;
+}
+
+#logo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: auto;
+}
+
+#searchIcon {
+  position: absolute;
+  margin-top: 19px;
+  left: 370px;
+  height: 57.5%;
+  width: auto;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#searchIcon:hover {
+  cursor: pointer;
+}
+
+#search {
+  position: absolute;
+  margin-top: 18.25px;
+  left: 423.2px;
+  height: 54%;
+  width: 40%;
+  border-radius: 2px;
+  border: 1.5px solid black;
+}
+
+#profileIcon {
+  position: absolute;
+  margin-top: 14px;
+  left: 1060px;
+  height: 70%;
+  width: auto;
+}
+
+#menuIcon {
+  position: absolute;
+  margin-top: 21px;
+  left: 1125px;
+  height: 50%;
+  width: auto;
+}
+
+#menuIcon2 {
+  position: absolute;
+  margin-top: 21px;
+  left: 1125px;
+  height: 50%;
+  width: auto;
+  display: none;
+}
+
+#subBar {
+  position: fixed;
+  top: 12%;
+  right: 0px;
+  width: 100%;
+  height: 1%;
+  background-color: #e1ad01;
+}
+
+.availableBooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  width: 90%;
+  z-index=-1;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: #ebe1e1;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  width: 250px;
+  height: auto;
+  animation: 1s ease-out 0s 1 slideInLeft;
+}
+
+.book:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.book img {
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.book h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.book p {
+  font-size: 0.8rem;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.request button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #050505;
+  width: 100%;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.request button:hover {
+  background-color: #505250;
+}
+
+#menuIcon:hover {
+  cursor: pointer;
+}
+
+#menuIcon2:hover {
+  cursor: pointer;
+}
+
+#welcome {
+  position: absolute;
+  font-size: 2rem;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  color: black;
+  z-index: -1;
+}
+
+#dropdown {
+  position: fixed;
+  top: 14.8%;
+  right: -400px;
+  width: 300px;
+  height: 550px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.5);
+  padding: 10px;
+  padding-top: 10px;
+}
+
+#dropdown p {
+  color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 1px;
+  width: 100%;
+  height: auto;
+  text-align: left;
+}
+
+#name p {
+  font-size: 200%;
+  text-align: center;
+}
+
+.logout {
+  max-width: 100px;
+  height: 30px;
+  margin-left: 30%;
+  margin-top: 40px;
+  padding: 2px;
+  border: 1px solid black;
+  background-color: lightgrey;
+}
+
+#textL input:hover {
+  cursor: pointer;
+}
+
+.logout img {
+  position: relative;
+  max-width: 20px;
+  max-height: auto;
+  left: 0px;
+  top: 0px;
+}
+
+#textL input {
+  position: relative;
+  font-size: 125%;
+  color: red;
+  padding: 0px;
+  height: auto;
+  width: auto;
+  left: 25px;
+  top: -27px;
+  border: 0px solid black;
+  background-color: lightgrey;
+}
+
+hr {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-style: inset;
+  border-width: 3px;
+  background-color: black;
+  width: 98%;
+}
+
+#searchMsg {
+  position: fixed;
+  top: 125px;
+  right: 0px;
+  width: 100%;
+  text-align: center;
+  color: blue;
+  display: none;
+}
+
+#searchMsg u:hover {
+  color: #0ac204;
+  cursor: pointer;
+}
