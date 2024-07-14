@@ -2,17 +2,51 @@
 <html>
 
 <head>
-  <title>Welcome</title>
-  <link rel='stylesheet' href="C:\SKCHRefBooks\SKCHRefBooks\static\css\landing.css">
+    <title>Login</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 
 <body>
 
-  <div id='topBar'>
-    <p id='heading'>SKCHRefBooks</p>
-      <a id = 'sign' href="signup.html"><p>Sign up</p></a> 
-      <a id = 'login' href="login.html"><p>Login</p></a> 
-  </div>
+    <div id="loginFormDiv">
+        <h1>Login</h1>
+        <form id='loginData' action="/" method="post">
+            {{ form.csrf_token }}
+            <label for="email">Email</label>
+            {{ form.email(id="email", placeholder="Enter your email") }}<br>
+
+            <label for="password">Password</label>
+            {{ form.password(id="password", placeholder="Enter your password") }}<br>
+
+            <a id="signup" href="{{url_for('auth.signup')}}">Do not have an account yet ? Sign up</a>
+            <input type="submit" value="Login">
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <style>
+                p {
+                    position : absolute;
+		                right : 0px;
+		                width : 100%;
+		                text-align : center;
+                    font-size: 14px;
+                    margin-top: 0;
+                    color: red;
+                }
+            </style>
+            {% for category, message in messages %}
+              <p class="{{ category }}">*{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+    </div>
+
+    <div id='topBar'>
+	<p id='heading'>Welcome to the website ! </p>
+
+    </div>
 
     <div class="container">
 		
