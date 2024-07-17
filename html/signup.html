@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOC TYPE html>
 <html>
 
 <head>
@@ -10,21 +10,37 @@
     <div id="signupFormDiv">
         <h1>Sign Up</h1>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <style>
-                ul {
-                    color: red;
-                }
-            </style>
+        {% if form.errors %}
+          <style>
+              li {
+                  padding-left: 40px;
+                  padding-bottom: 10px;
+                  color: red;
+              }
+          </style>
+          {% for field, errors in form.errors.items() %}
+          <u1>
+            <!-- <li>{{ form[field].label }}: {{ ', '.join(errors) }}</li> -->
+            <li>{{ ', '.join(errors) }}</li>
+          </u1>
+          {% endfor %}
+        {% endif %}
 
-            <ul class="flashes">
-              {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
+        <!--   {% if messages %} -->
+        <!--     <style> -->
+        <!--         ul { -->
+        <!--             color: red; -->
+        <!--         } -->
+        <!--     </style> -->
+
+        <!--     <ul class="flashes"> -->
+        <!--       {% for category, message in messages %} -->
+        <!--         <li class="{{ category }}">{{ message }}</li> -->
+        <!--       {% endfor %} -->
+        <!--     </ul> -->
+        <!--   {% endif %} -->
+        <!-- {% endwith %} -->
 
         <form method="post" action="/signup">
           {{ form.csrf_token }}

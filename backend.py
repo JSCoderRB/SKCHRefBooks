@@ -1,22 +1,74 @@
-import pandas as pd
+from flask_mysqldb import MySQL
+
+mysql = MySQL()
 
 
-# Function retrieve user details
-def get_userdata(df, email):
-    mask = df["email"].values == email
-    filtered_dict = df.loc[mask].to_dict(orient="records")[0]
-    return filtered_dict
+def get_all_uploads(cursor):
+    try:
+        cursor.execute("SELECT * FROM available_books")
+        data = cursor.fetchall()
+        return data
+
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
 
 
-# Function to insert a row into one of our dataframes
-def insert_row(df, details, fields):
-    new_row = {}
+def get_all_emails(cursor):
+    try:
+        cursor.execute("SELECT email FROM users")
+        data = cursor.fetchall()
+        return [val["email"] for val in data]
 
-    for index, field in enumerate(fields):
-        new_row[field] = [details[index]]
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
 
-    df = pd.concat([pd.DataFrame(new_row), df])
-    return df
+
+def get_userid(cursor, em):
+    try:
+        cursor.execute("SELECT user_id FROM users WHERE email = %s", (em,))
+        data = cursor.fetchone()
+        return data["user_id"]
+
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def get_passwd(cursor, userid):
+    try:
+        cursor.execute("SELECT password FROM users WHERE user_id = %s", (userid,))
+        data = cursor.fetchone()
+        return data["password"]
+
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def add_user(cursor, name, email, password, grade, contact_number, address):
+    try:
+        details = (
+            name,
+            email,
+            password,
+            grade,
+            contact_number if contact_number else None,
+            address if address else None,
+        )
+
+        cursor.execute(
+            "INSERT INTO users VALUES(DEFAULT, %s, %s, %s, %s, %s, %s)", details
+        )
+
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
 
 
 # Function to check password validity

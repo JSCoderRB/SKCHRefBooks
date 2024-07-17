@@ -54,7 +54,7 @@ class SignupForm(FlaskForm):
         "Contact Number",
         [
             validators.DataRequired(),
-            validators.Length(min=12, message="Please enter a valid contact number"),
+            validators.Length(max=10, message="Please enter a valid contact number"),
             validators.Regexp(
                 r"^\+?[0-9]+$", message="Please enter a valid contact number"
             ),
@@ -68,7 +68,7 @@ class SignupForm(FlaskForm):
         [
             validators.DataRequired(),
             validators.Length(
-                min=4, message="Password should contain at least 4 characters"
+                min=8, message="Password should contain at least 8 characters"
             ),
             valid_password,
         ],
