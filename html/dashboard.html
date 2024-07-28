@@ -27,6 +27,12 @@
       <p id='currentRequest'>Current book request : {{ curr_request }}</p>
       <p id='requestStatus'>Request Status : {{ request_stat }}</p>
       <p id='uploadStatus'>Uploads Status : {{ uploads_stat }}</p>
+      <div class='upload'>
+	      <form id='upload' action="/upload">
+            <img src='static/img/LogoutIcon.png' id='logoutIcon' alt='Image not found'>
+            <div id = 'textU'><input type='submit' value='Upload' id = 'up'></input></div>
+	      </form>
+      </div>
       <div class='logout'>
 	      <form id='logout' action="/logout">
             <img src='static/img/LogoutIcon.png' id='logoutIcon' alt='Image not found'>
