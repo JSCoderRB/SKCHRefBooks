@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <link rel='stylesheet' href="C:\SKCHRefBooks\SKCHRefBooks\static\css\uploads.css">
+</head>
+
+<body>
+
+    <h1><i>Upload a book</i></h1>
+
+    <div id="loginFormDiv">
+        <form id='loginData'>
+            <div class="input1" id="div1">
+            <label for="book_name">Book name : </label>
+            <input type="text" id="book_name" placeholder="Enter the book's name" required>
+            </div>
+            
+            <div class="input1" id="div2">
+            <label for="author" >Author : </label>
+            <input type="text" id="author" placeholder="Enter the author's name" required>
+            </div>
+
+            <div class="input1" id="div3">
+            <label for="reprint_version" >Reprint version (year) : </label>
+            <input type="text" id="reprint_version" placeholder="Enter the reprint version" required>
+            </div>
+
+            <p id="st">Select an image : </p>
+
+            <label for="book_image" id="attach">
+                <img src="C:\SKCHRefBooks\SKCHRefBooks\static\img\attachIcon.jpg" id="attachIcon">
+            </label>
+
+            <input type="file" id = "book_image" name="file" accept="image/*" onchange="loadFile(event)">
+
+            <p id="cst">Currently selected : </p>
+            <img id="cstImg" src="abc" alt="None">
+
+            <input type="submit" value="Upload" id="submit_button">
+
+        </form>
+    </div>
+
+
+<script>
+
+//alert('Hello');
+function loadFile(event) { 
+    image = document.getElementById('cstImg');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    console.log(image.src)
+}
+
+function note() { 
+    alert('Hi');
+}
+
+</script>
+
+</body>
+
+</html>

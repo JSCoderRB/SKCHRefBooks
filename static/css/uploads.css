@@ -1,0 +1,100 @@
+body { 
+    background-color: rgb(0, 20, 50);
+}
+
+h1{
+    position : relative;
+    margin : auto;
+    text-align: center;
+    color: #fff;
+    padding-top: 20px;
+    font-size: 3rem;
+}
+
+#loginFormDiv {
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(360, 360, 360, 0.4);
+    margin: auto;
+    margin-top: 35px;
+    padding: 50px;
+    width: 550px;
+    height: 385px;
+  }
+
+#book_image { 
+    display : none;
+}
+
+label img { 
+    width : 20px;
+}
+
+label:hover { 
+    cursor: pointer;
+}
+
+.input1 label {
+    position : relative;
+    left : 0;
+    font-size: 1.2rem;
+}
+
+.input1 input {
+    position: relative;
+    left : 20px;
+    width : 210px;
+    height : 20px;
+}
+
+.input1 { 
+    position : relative;
+    margin : auto;
+    border: 2px solid bl;
+    margin-bottom : 50px;
+}
+
+#st { 
+    position: relative;
+    font-size: 1.2rem;
+}
+
+#attachIcon { 
+    position : relative;
+    height : 22px;
+    width :auto;
+}
+
+#attach { 
+    position: relative;
+    left : 150px;
+    top : -40px;
+}
+
+
+#cst { 
+    position: relative;
+    font-size: 1.2rem;
+    margin-top: 0; 
+}
+
+#cstImg { 
+    height : 60px;
+    position : relative;
+    top : -45px;
+    left : 160px;
+}
+
+#submit_button:hover{ 
+    cursor: pointer;
+}
+
+#submit_button { 
+    position : relative;
+    left : -45px;
+    top : 10px;
+    height : 30px;
+    width : 80px;
+    font-size: 1rem;
+}
