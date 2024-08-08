@@ -14,6 +14,8 @@
         <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\ProfileIcon.png' id='profileIcon' alt='Image not found'>
         <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
         <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
+        <div id='subBar'></div>
+        <div id='subBar2'></div>
     </div>
 
     <div id='navBar'>
@@ -51,8 +53,6 @@
       
     </div>
 
-    <div id='subBar'></div>
-    <div id='subBar2'></div>
 
     <p id='welcome'>Welcome back, {{ name }} !</p>
 
@@ -87,6 +87,10 @@
         {% endfor %}
     </div>
 
+    <div class="requestStatus">
+        <h2>Request Status</h2>
+    </div> 
+
     <div class="yourRequest">
         <h2 id="_yourRequest">Your Request</h2>
         <h3 id="note">The book you have currently requested is displayed below. (Nothing has been requested if this section is empty.)</h3>
@@ -99,7 +103,7 @@
                 <button type="submit" name="cancelRequest" value='{{ i }}'>Cancel Request</button>
             </form>
         </div>
-    </div>
+    </div>   
 
     <div class="requestedBooks">
         <h2 id="_requestedBooks">Requested books</h2>
