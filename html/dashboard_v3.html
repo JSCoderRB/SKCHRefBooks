@@ -1,3 +1,6 @@
+{% for i in range(length) %}
+{% endfor %}
+
 <!DOCTYPE html>
 <html>
 
@@ -7,76 +10,161 @@
 </head>
 
 <body>
-    <div id='topBar'>
-        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\Logo.png' id='logo' alt='Image not found'>
-        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\SearchIcon.png' id='searchIcon' alt='Image not found'>
-        <input type="text" id="search" name="search" placeholder="type here to search">
-        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\ProfileIcon.png' id='profileIcon' alt='Image not found'>
-        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
-        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
-        <div id='subBar'></div>
-        <div id='subBar2'></div>
-    </div>
-
-    <div id='navBar'>
-        <button id="availableBooks" class="navbutton" onclick="goToAvailableBooks()">Available books</button>
-        <button id="uploadedBooks" class="navbutton" onclick="goToUploadedBooks()">Uploaded books</button>
-        <button id="yourRequest" class="navbutton" onclick="goToYourRequest()">Your request</button>
-        <button id="requestedBooks" class="navbutton" onclick="goToRequestedBooks()">Requested books</button>
-    </div>
-
-    <div id='dropdown'>
-
-        <div id='name'><p> {{ name }} </p></div>
-        <hr>
-        <p id='email'>Email : {{ email }}</p>
-        <p id='class'>Class : {{ grade }}</p>
-        <p id='upload'>Books uploaded : {{ my_uploads }}</p>
-        <p id='currentRequest'>Current book request : {{ curr_request }}</p>
-        <p id='requestStatus'>Request Status : {{ request_stat }}</p>
-        <p id='uploadStatus'>Uploads Status : {{ uploads_stat }}</p>
-
-        <div class="buttons">
-            <div class='upload'>
-                <form id='upload' action="/upload">
-                <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\uploadIcon.jpg' id='uploadIcon' alt='Image not found'>
-                <div id = 'textU'><input type='submit' value='Upload' id = 'up'></input></div>
-                </form>
-            </div>
-            <div class='logout'>
-                <form id='logout' action="/logout">
-                <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\LogoutIcon.png' id='logoutIcon' alt='Image not found'>
-                <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></input></div>
-                </form>
-            </div>
-        </div>
-      
-    </div>
-
-
-    <p id='welcome'>Welcome back, {{ name }} !</p>
-
 
     <div class="availableBooks">
-        <h2 id="_availableBooks">Available books</h2>
-        <h3 id='searchMsg'><u onclick='goBack()'><b>Showing only search results. Click to go back.</b></u></h3>
-        {% for i in range(length) %}
-        <div class="book" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+        <p class='title' id="_availableBooks">Available books</p>
+        <div class="book" id='a_name_author'>
             <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
-            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
             <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
             <p>By {{ uploads[i]["author"] }}</p>
             <form class="request" action="/book_request" method="post">
-                <button type="submit" name="request_button" value='{{ i }}'>Request this book</button>
+                <button type="submit" name="request_button" value='something'>Request this book</button>
             </form>
         </div>
-        {% endfor %}
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        <div class="book" id='a_name_author'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='something'>Request this book</button>
+            </form>
+        </div>
+        
     </div> 
 
     <div class="uploadedBooks">
-        <h2 id="_uploadedBooks">Uploaded books</h2>
+        <p class="title" id="_uploadedBooks">Uploaded books</p>
         {% for i in range(length) %}
-        <div class="book_u" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="remove" action="/book_remove" method="post">
+                <button type="submit" name="remove_button" value='{{ i }}'>Remove</button>
+            </form>
+        </div>
+        <div class="book_u" id='b-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
             <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
             <h3>{{ uploads[i]["book_name"] }}</h3>
             <p>By {{ uploads[i]["author"] }}</p>
@@ -92,9 +180,9 @@
     </div> 
 
     <div class="yourRequest">
-        <h2 id="_yourRequest">Your Request</h2>
+        <p class='title' id="_yourRequest">Your Request</p>
         <h3 id="note">The book you have currently requested is displayed below. (Nothing has been requested if this section is empty.)</h3>
-        <div class="book_cr" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+        <div class="book_cr" id='c-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
             <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
             <h3>{{ uploads[i]["book_name"] }}</h3>
             <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
@@ -104,11 +192,82 @@
             </form>
         </div>
     </div>   
-
     <div class="requestedBooks">
-        <h2 id="_requestedBooks">Requested books</h2>
+        <p class='title' id="_requestedBooks">Requested books</p>
         {% for i in range(length) %}
-        <div class="book_r" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
+            <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
+            <h3>{{ uploads[i]["book_name"] }}</h3>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <p>Requested by {{ uploads[i]["uploader"] }}, class 12</p>
+            <form class="give" action="/book_give" method="post">
+                <button type="submit" name="give_button" value='{{ i }}'>Give this book</button>
+            </form>
+        </div>
+        <div class="book_r" id='d-{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
             <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
             <h3>{{ uploads[i]["book_name"] }}</h3>
             <p>By {{ uploads[i]["author"] }}</p>
@@ -120,8 +279,61 @@
         {% endfor %}
     </div>
 
-    <div id = "endFill"></div>
+    <p id="searchMsg"><u onclick="goBack()">Showing only search results. Click to go back.</u></p>
+
+    <div id='topBar'>
+        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\Logo.png' id='logo' alt='Image not found'>
+        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\SearchIcon.png' id='searchIcon' alt='Image not found'>
+        <input type="text" id="search" name="search" placeholder="type here to search">
+        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\ProfileIcon.png' id='profileIcon' alt='Image not found'>
+        <p id="welcome">Welcome back</p>
+        <p id="topname">{{ name }}</p>
+        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
+        <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
+        <div id='subBar'></div>
+        <div id='subBar2'></div>
+    </div>
+
+    <div id='navBar'>
+        <button id="availableBooks" class="navbutton" onclick="goToAvailableBooks()">Available books</button>
+        <button id="uploadedBooks" class="navbutton" onclick="goToUploadedBooks()">Uploaded books</button>
+        <button id="yourRequest" class="navbutton" onclick="goToYourRequest()">Your request</button>
+        <button id="requestedBooks" class="navbutton" onclick="goToRequestedBooks()">Requested books</button>
+    </div>
+
+
+
+    <div id='dropdown'>
+
+        <div id='name'><p> {{ name }} </p></div>
+        <hr>
+        <p id='email'>Email : {{ email }}</p>
+        <p id='class'>Class : {{ grade }}</p>
+        <p id='upload'>Books uploaded : {{ my_uploads }}</p>
+        <p id='currentRequest'>Current book request : {{ curr_request }}</p>
+        <p id='requestStatus'>Request Status : {{ request_stat }}</p>
+        <p id='uploadStatus'>Uploads Status : {{ uploads_stat }}</p>
+
+        <div class="buttons1">
+            <div class='upload'>
+                <form id='uploadButton' action="/upload">
+                <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\uploadIcon.jpg' id='uploadIcon' alt='Image not found'>
+                <div id = 'textU'><input type='submit' value='Upload' id = 'up'></div>
+                </form>
+            </div>
+            <div class='logout'>
+                <form id='logout' action="/logout">
+                <img src='C:\SKCHRefBooks\SKCHRefBooks\static\img\LogoutIcon.png' id='logoutIcon' alt='Image not found'>
+                <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></div>
+                </form>
+            </div>
+        </div>
+      
+    </div>
+    
     <script src="C:\SKCHRefBooks\SKCHRefBooks\static\js\dashboard_v3.js"></script>
+
+    <div id = "endFill"></div>
 
 </body>
 

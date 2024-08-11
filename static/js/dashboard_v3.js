@@ -67,26 +67,43 @@ search.addEventListener('keydown', function(event){
     }
 )
 
+function goTo(el,speed) { 
+    var rect = el.getBoundingClientRect();
+    x = window.scrollY;
+    inc = 1;
+    pos = rect.top + window.scrollY - 140;
+    if(x > pos){
+        inc = -1;
+    }
+    function scroll(){
+        console.log(x, pos, Math.abs(pos - x), speed*inc, Math.abs(pos - x) > speed*inc);
+        window.scrollTo(0, x);
+        if(Math.abs(pos - x) > Math.abs(speed*inc)) { 
+            x += speed*inc;
+            window.requestAnimationFrame(scroll);
+        }else{
+            window.scrollTo(0,pos);
+        }
+    }
+    scroll();
+}
+
 function goToAvailableBooks() { 
     el = document.getElementById("_availableBooks");
-    var rect = el.getBoundingClientRect();
-    window.scrollTo(0, rect.top + window.scrollY - 140);
+    goTo(el, 50);
 }
 
 function goToUploadedBooks() { 
     el = document.getElementById("_uploadedBooks");
-    var rect = el.getBoundingClientRect();
-    window.scrollTo(0, rect.top + window.scrollY - 140);
+    goTo(el, 50);
 }
 
 function goToYourRequest() { 
     el = document.getElementById("_yourRequest");
-    var rect = el.getBoundingClientRect();
-    window.scrollTo(0, rect.top + window.scrollY - 140);
+    goTo(el, 50);
 }
 
 function goToRequestedBooks() { 
     el = document.getElementById("_requestedBooks");
-    var rect = el.getBoundingClientRect();
-    window.scrollTo(0, rect.top + window.scrollY - 140);
+    goTo(el, 50); 
 }
