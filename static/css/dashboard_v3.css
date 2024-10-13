@@ -465,3 +465,15 @@ left: 880px;
 color: goldenrod;
 font-size: 100px;
 }
+
+#notifications { 
+    width : 90%;
+    margin : auto;
+    height : 150px;
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+#notifications p{
+    color: rgb(255, 0, 0) ; 
+}

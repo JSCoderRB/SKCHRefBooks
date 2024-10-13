@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit profile</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <div id="signupFormDiv">
+        <h1>Edit Profile</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <style>
+                ul {
+                    color: red;
+                }
+            </style>
+
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="post" action="/signup">
+          {{ form.csrf_token }}
+
+          <label for="email">Email</label>
+          {{ form.email(id="email") }}<br>
+
+          <label for="name">Name</label>
+          {{ form.name(id="name") }}<br>
+
+          <label for="grade">Grade</label>
+          {{ form.grade(id="grade") }}<br>
+
+          <label for="contact_number">Contact Number</label>
+          {{ form.contact_number(id="contact_number") }}<br>
+
+          <label for="address">Address</label>
+          {{ form.address(id="address") }}<br>
+
+          <label for="password">New Password</label>
+          {{ form.password(id="password") }}<br>
+
+          <label for="password_confirmation">Confirm Password</label>
+          {{ form.password_confirmation(id="password_confirmation") }}<br>
+
+          <input type="submit" value="Signup">
+        </form>
+    </div>
+</body>
+
+</html>
