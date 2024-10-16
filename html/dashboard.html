@@ -62,9 +62,11 @@
 
     <div class="requestStatus">
         <p class='title2'>Request Status</p>
+        <p class='note2'>
         {% for i in range(req_details|length) %}
-          <p class='note2'>{{ req_details[i] }}</p>
+          {{ req_details[i] }} <br><br>
         {% endfor %}
+        </p>
     </div>
 
     <div class="requestedBooks">
