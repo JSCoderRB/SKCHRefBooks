@@ -38,16 +38,9 @@
         {% endfor %}
     </div>
 
-    <div class="requestStatus">
-        <h2>Request Status</h2>
-        {% for i in range(req_details|length) %}
-          <p id='requestStatus'>{{ req_details[i] }}</p>
-        {% endfor %}
-    </div>
-
     <div class="yourRequest">
         <p class='title' id="_yourRequest">Your Request</p>
-        <h3 id="note">The book you have currently requested is displayed below. (Nothing has been requested if this section is empty.)</h3>
+        <p class="note">The book you have currently requested is displayed below. (Nothing has been requested if this section is empty.)</p>
         {% if my_request %}
           <div class="book_cr" id='{{ my_request["book_name"] }},{{ my_request["author"] }}'>
               <img src="static/uploads/{{ my_request['filename'] }}" alt="Image unavailable">
@@ -65,6 +58,13 @@
               {% endif %}
           </div>
         {% endif %}
+    </div>
+
+    <div class="requestStatus">
+        <p class='title2'>Request Status</p>
+        {% for i in range(req_details|length) %}
+          <p class='note2'>{{ req_details[i] }}</p>
+        {% endfor %}
     </div>
 
     <div class="requestedBooks">
@@ -89,7 +89,7 @@
     <div id='topBar'>
         <img src='static/img/Logo.png' id='logo' alt='Image not found'>
         <img src='static/img/SearchIcon.png' id='searchIcon' alt='Image not found'>
-        <input type="text" id="search" name="search" placeholder="type here to search">
+        <input type="text" id="search" name="search" placeholder="type here to search (press enter)">
         <img src='static/img/ProfileIcon.png' id='profileIcon' alt='Image not found'>
         <p id="welcome">Welcome back</p>
         <p id="topname">{{ my_details[0] }}</p>
@@ -115,7 +115,7 @@
         <p id='email'>Email : {{ my_details[1] }}</p>
         <p id='class'>Class : {{ my_details[2] }}</p>
         {% if accepted_notif %}
-        <p id='note'>Notifications : </p>
+        <p id="notif">Notifications : </p>
         <div id="notifications">
             <ol>
             {% for notification in accepted_notif %}
@@ -138,13 +138,17 @@
                 <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></div>
                 </form>
             </div>
+            <div class='edit_profile'>
+                <form id='editButton' action="/edit_profile">
+                <div id = 'textE'><input type='submit' value="Edit profile" id = 'ep'></div>
+                </form>
+            </div>
         </div>
 
     </div>
 
     <script src="static/js/dashboard.js"></script>
 
-    <div id = "endFill"></div>
 
 </body>
 
