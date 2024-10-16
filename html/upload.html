@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/upload.css') }}">
+</head>
+
+<body>
+
+    <h1><i>Upload a book</i></h1>
+
+    <div id="uploadFormDiv">
+        {% if form.errors %}
+          <style>
+              li {
+                  padding-left: 40px;
+                  padding-bottom: 10px;
+                  color: red;
+              }
+          </style>
+          {% for field, errors in form.errors.items() %}
+          <u1>
+            <!-- <li>{{ form[field].label }}: {{ ', '.join(errors) }}</li> -->
+            <li>{{ ', '.join(errors) }}</li>
+          </u1>
+          {% endfor %}
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <style>
+                p {
+                    position : absolute;
+		                right : 0px;
+		                width : 100%;
+		                text-align : center;
+                    font-size: 14px;
+                    margin-top: 0;
+                    color: red;
+                }
+            </style>
+            {% for category, message in messages %}
+              <p class="{{ category }}">*{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form id='uploadData' action="/upload" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="input1" id="div1">
+            <label for="book_name">Book name : </label>
+            {{ form.book_name(id="book_name") }}
+            </div>
+
+            <div class="input1" id="div2">
+            <label for="author" >Author : </label>
+            {{ form.author(id="author") }}
+            </div>
+
+            <div class="input1" id="div3">
+            <label for="reprint_version" >Reprint version (year) : </label>
+            {{ form.version(id="reprint_version", placeholder="For e.g. : 1972-73") }}
+            </div>
+
+            <p id="st">Select an image : </p>
+
+            <label for="book_image" id="attach">
+                <img src="static/img/attachIcon.jpg" id="attachIcon">
+            </label>
+
+            <input type="file" id = "book_image" name="file" accept="image/*" onchange="loadFile(event)" required>
+
+            <p id="cst">Currently selected : </p>
+            <img id="cstImg" alt="None">
+
+            <input type="submit" value="Upload" id="submit_button">
+
+        </form>
+    </div>
+
+
+<script>
+
+//alert('Hello');
+function loadFile(event) {
+    image = document.getElementById('cstImg');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    console.log(image.src)
+}
+
+function note() {
+    alert('Hi');
+}
+
+</script>
+
+</body>
+
+</html>

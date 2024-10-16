@@ -1,4 +1,4 @@
-<!DOC TYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -20,50 +20,33 @@
           </style>
           {% for field, errors in form.errors.items() %}
           <u1>
-            <!-- <li>{{ form[field].label }}: {{ ', '.join(errors) }}</li> -->
             <li>{{ ', '.join(errors) }}</li>
           </u1>
           {% endfor %}
         {% endif %}
 
-        <!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
-        <!--   {% if messages %} -->
-        <!--     <style> -->
-        <!--         ul { -->
-        <!--             color: red; -->
-        <!--         } -->
-        <!--     </style> -->
-
-        <!--     <ul class="flashes"> -->
-        <!--       {% for category, message in messages %} -->
-        <!--         <li class="{{ category }}">{{ message }}</li> -->
-        <!--       {% endfor %} -->
-        <!--     </ul> -->
-        <!--   {% endif %} -->
-        <!-- {% endwith %} -->
-
         <form method="post" action="/signup">
           {{ form.csrf_token }}
 
-          <label for="email">Email</label>
+          {{ form.email.label }}
           {{ form.email(id="email") }}<br>
 
-          <label for="name">Name</label>
+          {{ form.name.label }}
           {{ form.name(id="name") }}<br>
 
-          <label for="grade">Grade</label>
+          {{ form.grade.label }}
           {{ form.grade(id="grade") }}<br>
 
-          <label for="contact_number">Contact Number</label>
+          {{ form.contact_number.label }}
           {{ form.contact_number(id="contact_number") }}<br>
 
-          <label for="address">Address</label>
+          {{ form.address.label }}
           {{ form.address(id="address") }}<br>
 
-          <label for="password">Password</label>
+          {{ form.password.label }}
           {{ form.password(id="password") }}<br>
 
-          <label for="password_confirmation">Confirm Password</label>
+          {{ form.password_confirmation.label }}
           {{ form.password_confirmation(id="password_confirmation") }}<br>
 
           <input type="submit" value="Signup">

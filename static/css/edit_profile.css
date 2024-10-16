@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#signupFormDiv {
+#editProfileFormDiv {
   position: fixed;
   overflow: scroll;
   margin-left: 410px;

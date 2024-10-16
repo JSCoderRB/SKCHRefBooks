@@ -4,6 +4,7 @@ from wtforms import (
     IntegerField,
     StringField,
     PasswordField,
+    FileField,
     validators,
 )
 
@@ -79,5 +80,34 @@ class SignupForm(FlaskForm):
         [
             validators.DataRequired(),
             validators.EqualTo("password", message="Passwords must match"),
+        ],
+    )
+
+
+# Defining an Edit Profile form and its fields
+class EditProfileForm(SignupForm):
+    password = PasswordField(
+        "New Password",
+        [
+            validators.DataRequired(),
+            validators.Length(
+                min=8, message="Password should contain at least 8 characters"
+            ),
+            valid_password,
+        ],
+    )
+
+
+# Defining the Upload Form and its fields
+class UploadForm(FlaskForm):
+    book_name = StringField("Book name", [validators.DataRequired()])
+    author = StringField("Author", [validators.Optional()])
+    version = StringField(
+        "Reprint version (year)",
+        [
+            validators.Optional(),
+            validators.Regexp(
+                r"^[0-9]{4}-[0-9]{2}$", message="Please enter a valid version"
+            ),
         ],
     )

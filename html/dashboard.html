@@ -1,130 +1,150 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <title>Home</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='css/dashboard.css') }}">
-  </head>
+</head>
 
-  <body>
-    <div id='topBar'>
-      <img src='static/img/Logo.png' id='logo' alt='Image not found'>
-      <img src='static/img/SearchIcon.png' id='searchIcon' alt='Image not found' onclick='ask()'>
-      <form id='searchForm'>
-        <input type="text" id="search" name="search" placeholder="(Click the search icon)">
-      </form>
-      <img src='static/img/ProfileIcon.png' id='profileIcon' alt='Image not found'>
-      <img src='static/img/MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
-      <img src='static/img/MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
-    </div>
-
-    <div id='dropdown'>
-      <div id='name'><p> {{ name }} </p></div>
-      <hr>
-      <p id='email'>Email : {{ email }}</p>
-      <p id='class'>Class : {{ grade }}</p>
-      <p id='upload'>Books uploaded : {{ my_uploads }}</p>
-      <p id='currentRequest'>Current book request : {{ curr_request }}</p>
-      <p id='requestStatus'>Request Status : {{ request_stat }}</p>
-      <p id='uploadStatus'>Uploads Status : {{ uploads_stat }}</p>
-      <div class='logout'>
-	      <form id='logout' action="/logout">
-            <img src='static/img/LogoutIcon.png' id='logoutIcon' alt='Image not found'>
-            <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></input></div>
-	      </form>
-      </div>
-    </div>
-
-    <div id='subBar'></div>
-
-    <p id='welcome'>Welcome back, {{ name }} !</p>
-
+<body>
 
     <div class="availableBooks">
-      <h3 id='searchMsg'><u onclick='goBack()'><b>Showing only search results. Click to go back.</b></u></h3>
+        <p class='title' id="_availableBooks">Available books</p>
 
-      {% for i in range(length) %}
+        {% for i in range(uploads|length) %}
         <div class="book" id='{{ uploads[i]["book_name"] }},{{ uploads[i]["author"] }}'>
-          <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg" alt="Image unavailable">
-          <h3>{{ uploads[i]["book_name"] }}</h3>
-          <p>Uploaded by {{ uploads[i]["uploader"] }}</p>
-          <p>By {{ uploads[i]["author"] }}</p>
-          <form class="request" action="/book_request" method="post">
-            <button type="submit" name="request_button" value='{{ i }}'>Request this book</button>
-          </form>
-    </div>
-      {% endfor %}
-
-
+            <img src="static/uploads/{{ uploads[i]['filename'] }}" alt="Image unavailable">
+            <h3 class="bookTitle">{{ uploads[i]["book_name"] }}</h3>
+            <p>Uploaded by {{ uploads[i]["user_name"] }}</p>
+            <p>By {{ uploads[i]["author"] }}</p>
+            <form class="request" action="/book_request" method="post">
+                <button type="submit" name="request_button" value='{{ uploads[i]["book_id"] }}'>Request this book</button>
+            </form>
+        </div>
+        {% endfor %}
     </div>
 
-<script>
+    <div class="uploadedBooks">
+        <p class="title" id="_uploadedBooks">Uploaded books</p>
+        {% for i in range(my_uploads|length) %}
+        <div class="book_u" id='{{ my_uploads[i]["book_name"] }},{{ my_uploads[i]["author"] }}'>
+            <img src="static/uploads/{{ my_uploads[i]['filename'] }}" alt="Image unavailable">
+            <h3>{{ my_uploads[i]["book_name"] }}</h3>
+            <p>By {{ my_uploads[i]["author"] }}</p>
+            <form class="remove" action="/delete_upload" method="post" onsubmit="return confirm('Are you sure you want to remove this upload?');">
+                <button type="submit" name="remove_button" value='{{ my_uploads[i]["book_id"] }}'>Remove</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
 
-function slideLeft(){
+    <div class="requestStatus">
+        <h2>Request Status</h2>
+        {% for i in range(req_details|length) %}
+          <p id='requestStatus'>{{ req_details[i] }}</p>
+        {% endfor %}
+    </div>
 
-drop = document.getElementById('dropdown') ;
-document.getElementById('menuIcon2').style.display = 'block' ; 
-document.getElementById('menuIcon').style.display = 'none' ; 
-r = -400 ;
+    <div class="yourRequest">
+        <p class='title' id="_yourRequest">Your Request</p>
+        <h3 id="note">The book you have currently requested is displayed below. (Nothing has been requested if this section is empty.)</h3>
+        {% if my_request %}
+          <div class="book_cr" id='{{ my_request["book_name"] }},{{ my_request["author"] }}'>
+              <img src="static/uploads/{{ my_request['filename'] }}" alt="Image unavailable">
+              <h3>{{ my_request["book_name"] }}</h3>
+              <p>Uploaded by {{ my_request["user_name"] }}</p>
+              <p>By {{ my_request["author"] }}</p>
+              {% if my_request["status"] == "Accepted" %}
+              <form class="confirmRequest" action="/confirm_request" method="post">
+                  <button type="submit" name="confirmRequest" value='{{ my_request["book_id"] }}'>Confirm Request</button>
+              </form>
+              {% else %}
+              <form class="cancelRequest" action="/cancel_request" method="post" onsubmit="return confirm('Are you sure you want to cancel this request?');">
+                  <button type="submit" name="cancelRequest" value='{{ my_request["book_id"] }}'>Cancel Request</button>
+              </form>
+              {% endif %}
+          </div>
+        {% endif %}
+    </div>
 
-function slide(){ 
-  r += 10 ;
-  drop.style.right = String(r) + 'px';
-  console.log(drop.style.right)
-  if(r < 20){ 
-     window.requestAnimationFrame(slide);
-  }
-}
+    <div class="requestedBooks">
+        <p class='title' id="_requestedBooks">Requested books</p>
+        {% for i in range(requested_uploads|length) %}
+        {% if requested_uploads[i]["status"] == "Requested" %}
+        <div class="book_r" id='{{ requested_uploads[i]["book_name"] }},{{ requested_uploads[i]["author"] }}'>
+            <img src="static/uploads/{{ requested_uploads[i]['filename'] }}" alt="Image unavailable">
+            <h3>{{ requested_uploads[i]["book_name"] }}</h3>
+            <p>By {{ requested_uploads[i]["author"] }}</p>
+            <p>Requested by {{ requested_uploads[i]["user_name"] }}</p>
+            <form class="give" action="/accept_request" method="post" onsubmit="return confirm('Are you sure you want to give this book?');">
+                <button type="submit" name="give_button" value='{{ requested_uploads[i]["book_id"] }}'>Give this book</button>
+            </form>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 
-slide();
+    <p id="searchMsg"><u onclick="goBack()">Showing only search results. Click to go back.</u></p>
 
-}
+    <div id='topBar'>
+        <img src='static/img/Logo.png' id='logo' alt='Image not found'>
+        <img src='static/img/SearchIcon.png' id='searchIcon' alt='Image not found'>
+        <input type="text" id="search" name="search" placeholder="type here to search">
+        <img src='static/img/ProfileIcon.png' id='profileIcon' alt='Image not found'>
+        <p id="welcome">Welcome back</p>
+        <p id="topname">{{ my_details[0] }}</p>
+        <img src='static/img/MenuIcon.png' id='menuIcon' alt='Image not found' onclick='slideLeft()'>
+        <img src='static/img/MenuIcon.png' id='menuIcon2' alt='Image not found' onclick='slideRight()'>
+        <div id='subBar'></div>
+        <div id='subBar2'></div>
+    </div>
 
-function slideRight(){
-
-drop = document.getElementById('dropdown') ;
-document.getElementById('menuIcon2').style.display = 'none' ; 
-document.getElementById('menuIcon').style.display = 'block' ; 
-r = 10 ;
-
-function slide(){ 
-  r -= 10 ;
-  drop.style.right = String(r) + 'px';
-  console.log(drop.style.right)
-  if(r > -400){ 
-     window.requestAnimationFrame(slide);
-  }
-}
-
-slide();
-
-}
-
-function ask(){
-  book = prompt('Enter the name of the book you want to search').toLowerCase();
-  allBooks = Array.from(document.getElementsByClassName('book'));
-  document.getElementById('searchMsg').style.display = 'block';
-  document.getElementById('welcome').style.display = 'none';
-  for (var i = 0; i < allBooks.length; i++) {
-    if(!(allBooks[i].id.toLowerCase().includes(book))){
-      allBooks[i].style.display = 'none';
-    } else {
-      allBooks[i].style.display = 'flex';
-    }
-  }
-}
+    <div id='navBar'>
+        <button id="availableBooks" class="navbutton" onclick="goToAvailableBooks()">Available books</button>
+        <button id="uploadedBooks" class="navbutton" onclick="goToUploadedBooks()">Uploaded books</button>
+        <button id="yourRequest" class="navbutton" onclick="goToYourRequest()">Your request</button>
+        <button id="requestedBooks" class="navbutton" onclick="goToRequestedBooks()">Requested books</button>
+    </div>
 
 
-function goBack(){
-  allBooks = Array.from(document.getElementsByClassName('book'));
-  document.getElementById('searchMsg').style.display = 'none';
-  document.getElementById('welcome').style.display = 'block';
-  for (var i = 0; i < allBooks.length; i++) {
-    allBooks[i].style.display = 'flex';
-  }
-}
 
-</script>
+    <div id='dropdown'>
+
+        <div id='name'><p> {{ my_details[0] }} </p></div>
+        <hr>
+        <p id='email'>Email : {{ my_details[1] }}</p>
+        <p id='class'>Class : {{ my_details[2] }}</p>
+        {% if accepted_notif %}
+        <p id='note'>Notifications : </p>
+        <div id="notifications">
+            <ol>
+            {% for notification in accepted_notif %}
+            <p id="notification_content">* {{ notification }}</p>
+            {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+
+        <div class="buttons1">
+            <div class='upload'>
+                <form id='uploadButton' action="/upload">
+                <img src='static/img/uploadIcon.jpg' id='uploadIcon' alt='Image not found'>
+                <div id = 'textU'><input type='submit' value='Upload' id = 'up'></div>
+                </form>
+            </div>
+            <div class='logout'>
+                <form id='logoutButton' action="/logout">
+                <img src='static/img/LogoutIcon.png' id='logoutIcon' alt='Image not found'>
+                <div id = 'textL'><input type='submit' value='Logout' id = 'lg'></div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="static/js/dashboard.js"></script>
+
+    <div id = "endFill"></div>
 
 </body>
 

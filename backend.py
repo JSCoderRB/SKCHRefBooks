@@ -5,7 +5,9 @@ mysql = MySQL()
 
 def get_all_uploads(cursor):
     try:
-        cursor.execute("SELECT * FROM available_books")
+        query = "SELECT book_id, book_name, author, version, filename, uploader_id, requester_id, user_name FROM books b JOIN users u ON u.user_id = b.uploader_id WHERE status = 'Available'"
+
+        cursor.execute(query)
         data = cursor.fetchall()
         return data
 
@@ -47,6 +49,59 @@ def get_passwd(cursor, userid):
         return None
 
 
+def get_my_request(cursor, uid):
+    try:
+        query = "SELECT book_id, book_name, author, version, filename, uploader_id, requester_id, user_name, status FROM books b JOIN users u ON u.user_id = b.uploader_id WHERE requester_id = %s"
+        cursor.execute(query, (uid,))
+        data = cursor.fetchone()
+        return data
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def get_my_uploads(cursor, uid):
+    try:
+        cursor.execute("SELECT * FROM books WHERE uploader_id = %s", (uid,))
+        data = cursor.fetchall()
+        return data
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def get_requested_uploads(cursor, uid):
+    try:
+        query = "SELECT book_id, book_name, author, version, filename, uploader_id, requester_id, user_name, status FROM books b JOIN users u ON u.user_id = b.requester_id WHERE uploader_id = %s"
+        cursor.execute(query, (uid,))
+        data = cursor.fetchall()
+        return data
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def get_my_details(cursor, uid):
+    try:
+        cursor.execute("SELECT * FROM users WHERE user_id = %s", (uid,))
+        data = cursor.fetchone()
+        return data
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
+def get_upl_details(cursor, bid):
+    try:
+        query = "SELECT uploader_id, user_name, email, contact_number, address FROM users u JOIN books b ON u.user_id = b.uploader_id WHERE book_id = %s"
+        cursor.execute(query, (bid,))
+        data = cursor.fetchone()
+        return data
+    except Exception as e:
+        print("Problem querying db: " + str(e))
+        return None
+
+
 def add_user(cursor, name, email, password, grade, contact_number, address):
     try:
         details = (
@@ -59,9 +114,117 @@ def add_user(cursor, name, email, password, grade, contact_number, address):
         )
 
         cursor.execute(
-            "INSERT INTO users VALUES(DEFAULT, %s, %s, %s, %s, %s, %s)", details
+            "INSERT INTO users VALUES(DEFAULT, %s, %s, %s, %s, %s, %s)",
+            details,
         )
 
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def change_details(cursor, uid, name, email, password, grade, contact_number, address):
+    try:
+        details = (
+            name,
+            email,
+            password,
+            grade,
+            contact_number if contact_number else None,
+            address if address else None,
+            uid,
+        )
+
+        cursor.execute(
+            "UPDATE users SET user_name = %s, email = %s, password = %s, grade = %s, contact_number = %s, address = %s WHERE user_id = %s",
+            details,
+        )
+
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def request_book(cursor, uid, bid):
+    try:
+        cursor.execute(
+            "UPDATE books SET requester_id = %s, status = 'Requested' WHERE book_id = %s",
+            (uid, bid),
+        )
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def upload_book(cursor, bname, author, version, fname, upid):
+    try:
+        details = (
+            bname,
+            author if author else None,
+            version if version else None,
+            fname if fname else "Default",
+            upid,
+            None,
+        )
+
+        cursor.execute(
+            "INSERT INTO books VALUES(DEFAULT, %s, %s, %s, %s, %s, %s, DEFAULT)",
+            details,
+        )
+
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def delete_book(cursor, bid):
+    try:
+        cursor.execute("DELETE FROM books WHERE book_id = %s", (bid,))
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def give_book(cursor, bid):
+    try:
+        cursor.execute(
+            "UPDATE books SET status = 'Accepted' WHERE book_id = %s", (bid,)
+        )
+        mysql.connection.commit()
+        return True
+
+    except Exception as e:
+        mysql.connection.rollback()
+        print("Problem inserting into db: " + str(e))
+        return False
+
+
+def request_cancel(cursor, bid):
+    try:
+        cursor.execute(
+            "UPDATE books SET requester_id = NULL, status = 'Available' WHERE book_id = %s",
+            (bid,),
+        )
         mysql.connection.commit()
         return True
 

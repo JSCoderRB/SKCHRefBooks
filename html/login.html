@@ -10,8 +10,9 @@
 
     <div id="loginFormDiv">
         <h1>Login</h1>
-        <form id='loginData' action="/" method="post">
+        <form id='loginData' action="/login" method="post">
             {{ form.csrf_token }}
+
             <label for="email">Email</label>
             {{ form.email(id="email", placeholder="Enter your email") }}<br>
 
@@ -43,26 +44,7 @@
 
     </div>
 
-    <div id='topBar'>
-	<p id='heading'>Welcome to the website ! </p>
 
-    </div>
-
-    <div class="container">
-		
-		<h2>Some popular books on our site</h2>
-
-    {% if uploads %}
-      {% for i in range(9) %}
-		    <div class="item">
-			    <img src="https://m.media-amazon.com/images/I/41dUJwodnnL._SY445_SX342_.jpg">
-  			  <p>{{ uploads[i]["book_name"] }}</p>
-       	</div>
-      {% endfor %}
-    {% endif %}
-
-
-    </div>
 </body>
 
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Profile</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/edit_profile.css') }}">
+</head>
+
+<body>
+    <div id="editProfileFormDiv">
+        <h1>Edit Profile</h1>
+
+        {% if form.errors %}
+          <style>
+              li {
+                  padding-left: 40px;
+                  padding-bottom: 10px;
+                  color: red;
+              }
+          </style>
+          {% for field, errors in form.errors.items() %}
+          <u1>
+            <li>{{ ', '.join(errors) }}</li>
+          </u1>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" action="/edit_profile">
+          {{ form.csrf_token }}
+
+          {{ form.email.label }}
+          {{ form.email(id="email") }}<br>
+
+          {{ form.name.label }}
+          {{ form.name(id="name") }}<br>
+
+          {{ form.grade.label }}
+          {{ form.grade(id="grade") }}<br>
+
+          {{ form.contact_number.label }}
+          {{ form.contact_number(id="contact_number") }}<br>
+
+          {{ form.address.label }}
+          {{ form.address(id="address") }}<br>
+
+          {{ form.password.label }}
+          {{ form.password(id="password") }}<br>
+
+          {{ form.password_confirmation.label }}
+          {{ form.password_confirmation(id="password_confirmation") }}<br>
+
+          <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>

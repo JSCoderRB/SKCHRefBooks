@@ -1,0 +1,41 @@
+CREATE TABLE users(
+             user_id CHAR(36) DEFAULT (UUID()),
+             user_name VARCHAR(30) NOT NULL,
+             email VARCHAR(30) NOT NULL,
+             password VARCHAR(150) NOT NULL,
+             grade INT NOT NULL,
+             contact_number CHAR(10),
+             address VARCHAR(80),
+             CONSTRAINT pk_users PRIMARY KEY (user_id));
+
+CREATE TABLE available_books(
+             book_id CHAR(36) DEFAULT (UUID()),
+             book_name VARCHAR(50) NOT NULL,
+             author VARCHAR(30),
+             version CHAR(7),
+             filename VARCHAR(100),
+             uploader_id VARCHAR(36),
+             requester_id VARCHAR(36),
+             status VARCHAR(10) DEFAULT 'Available',
+             CONSTRAINT pk_avbooks PRIMARY KEY (book_id),
+             CONSTRAINT fk_avbooks_1 FOREIGN KEY (uploader_id) REFERENCES users(user_id),
+             CONSTRAINT fk_avbooks_2 FOREIGN KEY (requester_id) REFERENCES users(user_id));
+
+INSERT INTO users VALUES
+    ('26043e2d-5ffa-11ef-936b-e45a165e96d4', 'Default1', 'default1@gmail.com', 'scrypt:32768:8:1$LYCE$350b21fcc8732bf40f1325290c0549971e7e6ebaba94d9d9f818c0a6135c8c6fbcfa95c8a359c471c04dc5951d2081297ee7155fea893b01a55f07c45e9890a4', 12, '8478373929', '#123, Nehru Road, Bengaluru'),
+    ('524fad9f-5ffa-11ef-936b-e45a165e96d4', 'Default2', 'default2@gmail.com', 'scrypt:32768:8:1$u6tW$745ec2b3f7f3b7cdfe3b4fe6c97c971deaedf75057177af59d4fcbb3e4b185a2b1cb8f55290b5cf75b78595823e37e0ae8ac0c7b27ead322ade08885e8614470', 12, '9975846493', '#123, Snake Road, Bengaluru'),
+    ('571b7328-5ff9-11ef-936b-e45a165e96d4', 'Rohith', 'r@gmail.com', 'scrypt:32768:8:1$Y2T0$bed043a36b1da12d1a20a2bc50d7f18a0b02140395d110265b3d49f23737bfd1cd1f0887e740ceaa7f231613a34ae38b847403c61408dc3a48ae3f8c472436c0', 12, '1212121212', '#142, M.G. Road - 01, Bangalore - 56'),
+    ('921a585c-5b26-11ef-9315-e35604104323', 'Gokul', 'g@gmail.com', 'scrypt:32768:8:1$dFUp$e1a02344984a441b7fda3d13e72696b957afe25dfe0771a0dcfee444dd93eac7ee2b380f1974b44a919fdb2904e856593ea8f5af8009c5f04d714511034ca32b', 12, '9923062424', '#123, Mall Road, Bengaluru'),
+    ('bbad6d99-5ff9-11ef-936b-e45a165e96d4', 'Rahul', 'rahul@gmail.com', 'scrypt:32768:8:1$xJx3$21f6d05225ca36c1472557e426cb502985cd36a1cc1f63e5d8437645fd7b1526e761a059915a9676ee2665f50bd029a4a6eed20ec227048d4044f4a7842a08d3', 11, '3958567321', '#123, Flight Road, Bengaluru');
+
+INSERT INTO available_books VALUES
+    ('07d0ea71-6001-11ef-936b-e45a165e96d4', 'Inorganic Chemistry', 'J.D. Lee', '1978-79', 'Inorganic_Chemistry_1978-79_571b7328-5ff9-11ef-936b-e45a165e96d4.jpg', '571b7328-5ff9-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('2bb2c2c5-5ffe-11ef-936b-e45a165e96d4', 'Concepts of Physics (Part 1)', 'H.C. Verma', '1992-93', 'Concepts_of_Physics_(Part_1)_1992-93_921a585c-5b26-11ef-9315-e35604104323.jpg', '921a585c-5b26-11ef-9315-e35604104323', NULL, 'Available'),
+    ('2e41447d-5fff-11ef-936b-e45a165e96d4', 'Physical Chemistry', 'P. Bahadur', '2007-08', 'Physical_Chemistry_2007-08_bbad6d99-5ff9-11ef-936b-e45a165e96d4.jpg', 'bbad6d99-5ff9-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('52e34e25-5fff-11ef-936b-e45a165e96d4', 'Problems in General Physics', 'I.E. Irodov', '1981-82', 'Problems_in_General_Physics_1981-82_bbad6d99-5ff9-11ef-936b-e45a165e96d4.jpg', 'bbad6d99-5ff9-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('57351a46-6000-11ef-936b-e45a165e96d4', 'Problems in Calculus of One Variable', 'I.A. Maron', '1987-88', 'Problems_in_Calculus_of_One_Variable_1987-88_524fad9f-5ffa-11ef-936b-e45a165e96d4.jpg', '524fad9f-5ffa-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('8abc2c7e-6000-11ef-936b-e45a165e96d4', 'IIT Mathematics', 'M.L. Khanna', '1996-97', 'IIT_Mathematics_1996-97_524fad9f-5ffa-11ef-936b-e45a165e96d4.jpg', '524fad9f-5ffa-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('a3a7ef22-5fff-11ef-936b-e45a165e96d4', 'Mathematics for Class 12', 'R.D. Sharma', '2010-11', 'Mathematics_for_Class_12_2010-11_26043e2d-5ffa-11ef-936b-e45a165e96d4.jpg', '26043e2d-5ffa-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('ad6f1d43-5ffe-11ef-936b-e45a165e96d4', 'Higher Algebra', 'Hall and Knight', '1934-35', 'Higher_Algebra_1934-35_921a585c-5b26-11ef-9315-e35604104323.jpg', '921a585c-5b26-11ef-9315-e35604104323', NULL, 'Available'),
+    ('cfc4580d-6000-11ef-936b-e45a165e96d4', 'Coordinate Geometry', 'S.L. Loney', '1957-58', 'Coordinate_Geometry_1957-58_571b7328-5ff9-11ef-936b-e45a165e96d4.jpg', '571b7328-5ff9-11ef-936b-e45a165e96d4', NULL, 'Available'),
+    ('f21be44f-5fff-11ef-936b-e45a165e96d4', 'Organic Chemistry', 'Morrison and Boyd', '2009-10', 'Organic_Chemistry_2009-10_26043e2d-5ffa-11ef-936b-e45a165e96d4.jpg', '26043e2d-5ffa-11ef-936b-e45a165e96d4', NULL, 'Available');
